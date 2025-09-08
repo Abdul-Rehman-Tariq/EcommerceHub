@@ -7,6 +7,12 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ||
     : 'http://localhost:5000'  // Use localhost in development
   );
 
+console.log('API Configuration:', {
+  MODE: import.meta.env.MODE,
+  VITE_API_URL: import.meta.env.VITE_API_URL,
+  API_BASE_URL: API_BASE_URL
+});
+
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
