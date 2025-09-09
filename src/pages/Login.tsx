@@ -41,23 +41,33 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/20 to-background p-4">
-      <Card className="w-full max-w-md shadow-lg">
-        <CardHeader className="text-center">
-          <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-            <LogIn className="h-6 w-6 text-primary" />
+    <div className="min-h-screen hero-gradient flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      </div>
+
+      <div className="relative w-full max-w-md">
+        <div className="glass-card p-8">
+          <div className="text-center mb-8">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full flex items-center justify-center mb-6 backdrop-blur-sm border border-purple-500/20">
+              <LogIn className="h-8 w-8 text-purple-400" />
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2">
+              Welcome Back
+            </h1>
+            <p className="text-gray-300">
+              Sign in to your ProductHub account
+            </p>
           </div>
-          <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription>
-            Sign in to your ProductHub account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="identifier">Email or Username</Label>
+              <Label htmlFor="identifier" className="text-gray-200 font-medium">Email or Username</Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-purple-400" />
                 <Input
                   id="identifier"
                   name="identifier"
@@ -65,16 +75,16 @@ const Login: React.FC = () => {
                   placeholder="Enter your email or username"
                   value={formData.identifier}
                   onChange={handleChange}
-                  className="pl-10"
+                  className="pl-10 glass-card border-purple-500/30 focus:border-purple-400/50 bg-gray-900/40 text-white placeholder:text-gray-400"
                   required
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-gray-200 font-medium">Password</Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-purple-400" />
                 <Input
                   id="password"
                   name="password"
@@ -82,7 +92,7 @@ const Login: React.FC = () => {
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="pl-10"
+                  className="pl-10 glass-card border-purple-500/30 focus:border-purple-400/50 bg-gray-900/40 text-white placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -90,26 +100,33 @@ const Login: React.FC = () => {
 
             <Button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary" 
+              className="w-full btn-gradient hover:scale-[1.02] transition-all duration-200 text-white font-semibold py-3" 
               disabled={loading}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  <span>Signing in...</span>
+                </div>
+              ) : (
+                'Sign In'
+              )}
             </Button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
+          <div className="mt-8 text-center">
+            <p className="text-gray-300">
               Don't have an account?{' '}
               <Link 
                 to="/register" 
-                className="font-medium text-primary hover:text-primary/90 transition-colors"
+                className="font-medium bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent hover:from-purple-300 hover:to-pink-300 transition-all duration-200"
               >
                 Create one
               </Link>
             </p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

@@ -16,9 +16,10 @@ import {
   RotateCcw,
   Plus,
   Minus,
-  Heart,
   Share2,
-  Loader2
+  Loader2,
+  Copy,
+  Check
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/hooks/use-toast';
@@ -43,6 +44,7 @@ const ProductDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [isShared, setIsShared] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -98,6 +100,45 @@ const ProductDetails: React.FC = () => {
     }).format(Number(price));
   };
 
+  const handleShare = async () => {
+    if (!product) return;
+
+    const shareData = {
+      title: product.name,
+      text: `Check out this amazing product: ${product.name}`,
+      url: window.location.href,
+    };
+
+    try {
+      // Try using the modern Web Share API first (mobile devices)
+      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        // No toast for native share - the OS handles the feedback
+      } else {
+        // Fallback to copying URL to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        setIsShared(true);
+        
+        toast({
+          title: "Link copied!",
+          description: "Product link copied to clipboard",
+        });
+
+        // Reset the share state after 2 seconds
+        setTimeout(() => {
+          setIsShared(false);
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
+      toast({
+        title: "Share failed",
+        description: "Unable to share product. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const incrementQuantity = () => {
     if (product && quantity < (product.stock_quantity || 10)) {
       setQuantity(prev => prev + 1);
@@ -142,13 +183,20 @@ const ProductDetails: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-10 right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 w-80 h-80 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      </div>
+
+      <div className="relative container mx-auto px-4 py-8">
         {/* Back Button */}
         <Button 
           variant="ghost" 
           onClick={() => navigate('/shop')}
-          className="mb-6 flex items-center space-x-2"
+          className="mb-6 flex items-center space-x-2 glass-card border-purple-500/30 hover:bg-purple-500/20 text-purple-300 hover:text-white transition-all duration-300"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Shop</span>
@@ -157,19 +205,19 @@ const ProductDetails: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Product Images */}
           <div className="space-y-4">
-            <Card className="overflow-hidden">
-              <div className="aspect-square bg-muted flex items-center justify-center">
+            <div className="glass-card overflow-hidden max-w-md mx-auto lg:max-w-none">
+              <div className="aspect-square bg-gradient-to-br from-gray-800/50 to-gray-900/50 flex items-center justify-center">
                 {product.image_url ? (
                   <img 
                     src={product.image_url} 
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                 ) : (
-                  <Package className="h-24 w-24 text-muted-foreground" />
+                  <Package className="h-24 w-24 text-purple-400" />
                 )}
               </div>
-            </Card>
+            </div>
             
             {/* Thumbnail images (placeholder for multiple images) */}
             <div className="grid grid-cols-4 gap-2">
@@ -200,19 +248,21 @@ const ProductDetails: React.FC = () => {
           {/* Product Information */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+              <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                {product.name}
+              </h1>
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center space-x-1">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star key={star} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
-                  <span className="text-sm text-muted-foreground ml-1">(4.8) • 127 reviews</span>
+                  <span className="text-sm text-gray-300 ml-1">(4.8) • 127 reviews</span>
                 </div>
               </div>
-              <p className="text-2xl font-bold text-primary mb-4">
+              <p className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 {formatPrice(product.price)}
               </p>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-gray-300 leading-relaxed text-lg">
                 {product.description}
               </p>
             </div>
@@ -220,17 +270,18 @@ const ProductDetails: React.FC = () => {
             <Separator />
 
             {/* Quantity Selector */}
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div>
-                <Label htmlFor="quantity" className="text-sm font-medium">
+                <Label htmlFor="quantity" className="text-sm font-medium text-gray-200">
                   Quantity
                 </Label>
-                <div className="flex items-center space-x-2 mt-1">
+                <div className="flex items-center space-x-3 mt-2">
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={decrementQuantity}
                     disabled={quantity <= 1}
+                    className="glass-card border-purple-500/30 hover:bg-purple-500/20 text-purple-300 hover:text-white"
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
@@ -241,27 +292,28 @@ const ProductDetails: React.FC = () => {
                     max={product.stock_quantity || 10}
                     value={quantity}
                     onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-20 text-center"
+                    className="w-20 text-center glass-card border-purple-500/30 bg-gray-900/40 text-white"
                   />
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={incrementQuantity}
                     disabled={quantity >= (product.stock_quantity || 10)}
+                    className="glass-card border-purple-500/30 hover:bg-purple-500/20 text-purple-300 hover:text-white"
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm text-green-400">
                     {product.stock_quantity ? `${product.stock_quantity} available` : 'In stock'}
                   </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   onClick={handleBuyNow}
-                  className="flex-1 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary"
+                  className="flex-1 btn-gradient hover:scale-[1.02] transition-all duration-200"
                   size="lg"
                 >
                   <ShoppingCart className="h-4 w-4 mr-2" />
@@ -270,22 +322,32 @@ const ProductDetails: React.FC = () => {
                 <Button 
                   variant="outline" 
                   onClick={handleAddToCart}
-                  className="flex-1"
+                  className="flex-1 glass-card border-purple-500/30 hover:bg-purple-500/20 text-purple-300 hover:text-white transition-all duration-300"
                   size="lg"
                 >
                   Add to Cart
                 </Button>
               </div>
 
-              {/* Wishlist and Share */}
-              <div className="flex gap-3">
-                <Button variant="outline" size="sm" className="flex-1">
-                  <Heart className="h-4 w-4 mr-2" />
-                  Add to Wishlist
-                </Button>
-                <Button variant="outline" size="sm" className="flex-1">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
+              {/* Share */}
+              <div className="flex justify-center">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleShare}
+                  className="glass-card border-purple-500/30 hover:bg-purple-500/20 text-purple-300 hover:text-white transition-all duration-300 px-6"
+                >
+                  {isShared ? (
+                    <>
+                      <Check className="h-4 w-4 mr-2" />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="h-4 w-4 mr-2" />
+                      Share Product
+                    </>
+                  )}
                 </Button>
               </div>
             </div>

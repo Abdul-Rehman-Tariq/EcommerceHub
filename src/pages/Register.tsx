@@ -39,23 +39,33 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/20 to-background p-4">
-      <Card className="w-full max-w-md shadow-lg">
-        <CardHeader className="text-center">
-          <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-            <UserPlus className="h-6 w-6 text-primary" />
+    <div className="min-h-screen hero-gradient flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-10 right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      </div>
+
+      <div className="relative w-full max-w-md">
+        <div className="glass-card p-8">
+          <div className="text-center mb-8">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full flex items-center justify-center mb-6 backdrop-blur-sm border border-purple-500/20">
+              <UserPlus className="h-8 w-8 text-purple-400" />
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2">
+              Create Account
+            </h1>
+            <p className="text-gray-300">
+              Join ProductHub to start managing your products
+            </p>
           </div>
-          <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
-          <CardDescription>
-            Join ProductHub to start managing your products
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username" className="text-gray-200 font-medium">Username</Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <User className="absolute left-3 top-3 h-4 w-4 text-purple-400" />
                 <Input
                   id="username"
                   name="username"
@@ -63,16 +73,16 @@ const Register: React.FC = () => {
                   placeholder="Enter your username"
                   value={formData.username}
                   onChange={handleChange}
-                  className="pl-10"
+                  className="pl-10 glass-card border-purple-500/30 focus:border-purple-400/50 bg-gray-900/40 text-white placeholder:text-gray-400"
                   required
                 />
               </div>
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-gray-200 font-medium">Email</Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-purple-400" />
                 <Input
                   id="email"
                   name="email"
@@ -80,16 +90,16 @@ const Register: React.FC = () => {
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="pl-10"
+                  className="pl-10 glass-card border-purple-500/30 focus:border-purple-400/50 bg-gray-900/40 text-white placeholder:text-gray-400"
                   required
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-gray-200 font-medium">Password</Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-purple-400" />
                 <Input
                   id="password"
                   name="password"
@@ -97,7 +107,7 @@ const Register: React.FC = () => {
                   placeholder="Create a password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="pl-10"
+                  className="pl-10 glass-card border-purple-500/30 focus:border-purple-400/50 bg-gray-900/40 text-white placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -105,26 +115,33 @@ const Register: React.FC = () => {
 
             <Button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary" 
+              className="w-full btn-gradient hover:scale-[1.02] transition-all duration-200 text-white font-semibold py-3" 
               disabled={loading}
             >
-              {loading ? 'Creating Account...' : 'Create Account'}
+              {loading ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  <span>Creating Account...</span>
+                </div>
+              ) : (
+                'Create Account'
+              )}
             </Button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
+          <div className="mt-8 text-center">
+            <p className="text-gray-300">
               Already have an account?{' '}
               <Link 
                 to="/login" 
-                className="font-medium text-primary hover:text-primary/90 transition-colors"
+                className="font-medium bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent hover:from-purple-300 hover:to-pink-300 transition-all duration-200"
               >
                 Sign in
               </Link>
             </p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };
