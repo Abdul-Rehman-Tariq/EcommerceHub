@@ -3,7 +3,7 @@ import 'dotenv/config';
 export default {
   development: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL || {
+    connection: {
       host: process.env.DB_HOST || 'localhost',
       port: process.env.DB_PORT || 5432,
       database: process.env.DB_NAME || 'auth_cart_db',
@@ -20,11 +20,12 @@ export default {
   },
   production: {
     client: 'postgresql',
-    connection: {
-      connectionString: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false
-      }
+    connection: process.env.DATABASE_URL || {
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD
     },
     migrations: {
       directory: './migrations',

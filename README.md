@@ -1,469 +1,322 @@
-# 🛍️ EcommerceHub - Full-Stack E-commerce Platform
+# Auth Cart Quest - Full Stack Web Application
 
-<div align="center">
+A complete full-stack authentication and product management system built with modern web technologies.
 
-![EcommerceHub](https://img.shields.io/badge/EcommerceHub-Full--Stack-blue?style=for-the-badge&logo=react)
-![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+## 🏗 Tech Stack
 
-**A modern, secure, and scalable e-commerce platform built with React, Node.js, and PostgreSQL**
+### Backend
+- **Node.js** + **Express.js** - RESTful API server
+- **PostgreSQL** - Database with SQL migrations
+- **JWT** - Secure authentication
+- **bcrypt** - Password hashing
+- **Knex.js** - SQL query builder and migrations
+- **Joi** - Input validation
 
-[🚀 Live Demo](https://your-app.vercel.app) • [📖 Documentation](#documentation) • [🐛 Report Bug](../../issues) • [✨ Request Feature](../../issues)
+### Frontend
+- **React** + **TypeScript** - Modern UI framework
+- **Vite** - Fast build tool
+- **React Router** - Client-side routing
+- **Axios** - HTTP client
+- **Tailwind CSS** - Utility-first styling
+- **shadcn/ui** - Beautiful UI components
+- **Context API** - State management
 
-</div>
+## 🚀 Features
 
----
+- 🔐 **Secure Authentication** - JWT-based login/register
+- 👤 **User Management** - Profile management
+- 🛍️ **Product CRUD** - Create, read, update, delete products
+- 🛒 **Shopping Cart** - Add/remove items, manage quantities
+- 📱 **Responsive Design** - Mobile-first approach
+- 🔒 **Protected Routes** - Auth-based access control
+- ✅ **Form Validation** - Client and server-side validation
+- 🎨 **Modern UI** - Clean, professional interface
 
-## 📋 Table of Contents
+## 📁 Project Structure
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Quick Start](#-quick-start)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Deployment](#-deployment)
-- [API Documentation](#-api-documentation)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
-## 🎯 Overview
-
-**EcommerceHub** is a production-ready, full-stack e-commerce platform designed for modern web standards. It provides a complete shopping experience with user authentication, product management, shopping cart functionality, and secure checkout processes.
-
-Built with performance, security, and scalability in mind, this platform demonstrates modern web development best practices and can serve as either a learning resource or a foundation for real-world e-commerce applications.
-
----
-
-## ✨ Features
-
-### 🛒 **Customer Features**
-- **User Registration & Authentication** - Secure account creation and login
-- **Product Browsing** - Advanced search and filtering capabilities  
-- **Product Details** - Comprehensive product information with image galleries
-- **Shopping Cart** - Add, remove, and modify cart items
-- **Secure Checkout** - Streamlined checkout process
-- **Order History** - Track past purchases and order status
-- **Responsive Design** - Seamless experience across all devices
-
-### 👑 **Admin Features**
-- **Admin Dashboard** - Comprehensive store management interface
-- **Product Management** - Create, update, and delete products
-- **Image Upload** - Cloudinary integration for product images
-- **Order Management** - View and update order statuses
-- **User Management** - Role-based access control
-- **Analytics Dashboard** - Sales and performance metrics *(Coming Soon)*
-
-### 🔒 **Security Features**
-- **JWT Authentication** - Secure token-based authentication
-- **Password Hashing** - bcrypt encryption for user passwords
-- **Rate Limiting** - Protection against API abuse
-- **CORS Protection** - Cross-origin resource sharing security
-- **Input Validation** - Joi-based request validation
-- **SQL Injection Prevention** - Knex.js query builder protection
-
----
-
-## 🛠 Tech Stack
-
-### **Frontend**
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| **React** | ^18.3.1 | UI Framework |
-| **TypeScript** | ^5.8.3 | Type Safety |
-| **Vite** | ^5.4.19 | Build Tool |
-| **Tailwind CSS** | ^3.4.17 | Styling Framework |
-| **shadcn/ui** | Latest | UI Components |
-| **React Router** | ^6.30.1 | Client-side Routing |
-| **Axios** | Latest | HTTP Client |
-
-### **Backend**
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| **Node.js** | ^18.0.0 | Runtime Environment |
-| **Express.js** | ^4.18.2 | Web Framework |
-| **PostgreSQL** | ^14.0 | Primary Database |
-| **Knex.js** | ^3.0.1 | Query Builder |
-| **JWT** | ^9.0.2 | Authentication |
-| **bcrypt** | ^5.1.1 | Password Hashing |
-| **Cloudinary** | ^2.7.0 | Image Storage |
-
-### **DevOps & Deployment**
-| Technology | Purpose |
-|-----------|---------|
-| **Vercel** | Hosting Platform |
-| **GitHub** | Version Control |
-| **ESLint** | Code Linting |
-| **Prettier** | Code Formatting |
-
----
-
-## 🏗 Architecture
-
-### **Project Structure**
 ```
-ecommercehub/
-├── 📁 src/                    # Frontend source code
-│   ├── 📁 components/         # Reusable UI components
-│   │   ├── 📁 ui/            # shadcn/ui components
-│   │   ├── Navbar.tsx        # Navigation component
-│   │   └── ProtectedRoute.tsx # Route protection
-│   ├── 📁 pages/             # Route components
-│   │   ├── Home.tsx          # Landing page
-│   │   ├── Shop.tsx          # Product catalog
-│   │   ├── ProductDetails.tsx # Individual product page
-│   │   ├── Cart.tsx          # Shopping cart
-│   │   ├── Login.tsx         # Authentication
-│   │   ├── Register.tsx      # User registration
-│   │   ├── Dashboard.tsx     # User dashboard
-│   │   └── AdminDashboard.tsx # Admin interface
-│   ├── 📁 context/           # State management
-│   │   ├── AuthContext.tsx   # Authentication state
-│   │   └── CartContext.tsx   # Shopping cart state
-│   ├── 📁 hooks/             # Custom React hooks
-│   ├── 📁 types/             # TypeScript definitions
-│   └── 📁 api/               # API client configuration
-├── 📁 api/                  # Vercel serverless functions
-├── 📄 vercel.json           # Deployment configuration
-└── 📄 package.json          # Dependencies & scripts
+auth-cart-quest/
+├── src/                     # React + TypeScript frontend
+│   ├── components/         # Reusable UI components
+│   ├── pages/             # Route components
+│   ├── context/           # React Context (Auth, Cart)
+│   ├── types/             # TypeScript type definitions
+│   ├── api/               # API client configuration
+│   └── lib/               # Utilities
+│
+└── backend/               # Node.js + Express API
+    ├── config/           # Database configuration
+    ├── controllers/      # Route handlers
+    ├── middleware/       # Auth, validation, error handling
+    ├── models/           # Database models
+    ├── routes/           # API routes
+    ├── migrations/       # Database migrations
+    ├── seeds/            # Sample data
+    └── package.json
 ```
 
----
-
-## � Quick Start
+## 🛠 Installation & Setup
 
 ### Prerequisites
-- **Node.js** (v18 or higher)
-- **npm** or **yarn**
-- **PostgreSQL** (v12 or higher)
-- **Cloudinary Account** (for image uploads)
+- Node.js (v18+)
+- npm or yarn
+- PostgreSQL (v12+)
 
-### 1-Minute Setup
+### 1. Clone the Repository
 ```bash
-# Clone the repository
 git clone <repository-url>
-cd ecommercehub
+cd auth-cart-quest-main
+```
+
+### 2. Backend Setup
+
+```bash
+# Navigate to backend directory
+cd backend
 
 # Install dependencies
 npm install
 
-# Setup environment variables
+# Set up environment variables
 cp .env.example .env
 # Edit .env with your database credentials
 
-# Create and setup database
-createdb ecommercehub_db
+# Create PostgreSQL database
+createdb auth_cart_db
+
+# Run database migrations
 npm run migrate
+
+# (Optional) Add sample data
 npm run seed
 
-# Start development server
+# Start the development server
 npm run dev
 ```
 
-**That's it!** Your e-commerce platform is now running at `http://localhost:5173`
+The backend will run on `http://localhost:5000`
 
----
-
-## 📦 Installation
-
-### Complete Setup Guide
-
-1. **Clone the Repository**
-   ```bash
-   git clone <repository-url>
-   cd ecommercehub
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Environment Configuration**
-   ```bash
-   cp .env.example .env
-   ```
-
-   Edit `.env` file with your configuration:
-   ```env
-   # Database Configuration
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_NAME=ecommercehub_db
-   DB_USER=postgres
-   DB_PASSWORD=your_password
-
-   # JWT Configuration
-   JWT_SECRET=your_super_secret_jwt_key
-   JWT_EXPIRES_IN=7d
-
-   # Cloudinary Configuration
-   CLOUDINARY_CLOUD_NAME=your_cloud_name
-   CLOUDINARY_API_KEY=your_api_key
-   CLOUDINARY_API_SECRET=your_api_secret
-
-   # Server Configuration
-   PORT=5000
-   NODE_ENV=development
-   FRONTEND_URL=http://localhost:5173
-   ```
-
-4. **Database Setup**
-   ```bash
-   # Create PostgreSQL database
-   createdb ecommercehub_db
-
-   # Run migrations
-   npm run migrate
-
-   # Add sample data (optional)
-   npm run seed
-   ```
-
-5. **Start Development Server**
-   ```bash
-   npm run dev
-   ```
-
----
-
-## 🌐 Deployment
-
-### Vercel Deployment (Recommended)
-
-This project is optimized for Vercel deployment with serverless functions.
-
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Connect to Vercel**
-   - Visit [vercel.com](https://vercel.com)
-   - Import your GitHub repository
-   - Vercel will automatically detect the configuration
-
-3. **Environment Variables**
-   Add these in Vercel dashboard:
-   ```
-   DB_HOST=your_production_db_host
-   DB_NAME=your_production_db_name
-   DB_USER=your_production_db_user
-   DB_PASSWORD=your_production_db_password
-   JWT_SECRET=your_production_jwt_secret
-   CLOUDINARY_CLOUD_NAME=your_cloud_name
-   CLOUDINARY_API_KEY=your_api_key
-   CLOUDINARY_API_SECRET=your_api_secret
-   ```
-
-4. **Database Setup**
-   - Use a managed PostgreSQL service (Supabase, Neon, etc.)
-   - Run migrations on your production database
-
----
-
-## 📡 API Documentation
-
-### Authentication Endpoints
-
-#### Register User
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "username": "johndoe",
-  "email": "john@example.com", 
-  "password": "securepassword123"
-}
-```
-
-#### Login User
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "securepassword123"
-}
-```
-
-### Product Endpoints
-
-#### Get All Products
-```http
-GET /api/products
-```
-
-#### Create Product (Admin Only)
-```http
-POST /api/products
-Authorization: Bearer <admin_jwt_token>
-Content-Type: multipart/form-data
-
-{
-  "name": "Product Name",
-  "description": "Product description",
-  "price": 29.99,
-  "category": "Electronics",
-  "image": <file>
-}
-```
-
----
-
-## 🎯 Default Test Accounts
-
-After running sample data setup:
-
-### Regular User
-- **Email:** `user@example.com`
-- **Password:** `password123`
-- **Role:** user
-
-### Admin User  
-- **Email:** `admin@example.com`
-- **Password:** `admin123`
-- **Role:** admin
-
----
-
-## 🛠 Development Scripts
+### 3. Frontend Setup
 
 ```bash
-# Development
+# Navigate to frontend directory (from project root)
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The frontend will run on `http://localhost:8080`
+
+## 🗄 Database Setup
+
+### Quick Setup with Default Settings:
+1. Install PostgreSQL with default settings
+2. Create database: `createdb auth_cart_db`  
+3. Update backend `.env` file with your credentials
+4. Run: `npm run migrate` (in backend directory)
+5. Run: `npm run seed` (optional, for sample data)
+
+### Detailed Setup:
+See `backend/DATABASE_SETUP.md` for comprehensive database setup instructions.
+
+## 🔧 Environment Variables
+
+### Backend (.env)
+```env
+NODE_ENV=development
+PORT=5000
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=auth_cart_db
+DB_USER=postgres
+DB_PASSWORD=your_password
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=7d
+FRONTEND_URL=http://localhost:8080
+```
+
+## 📡 API Endpoints
+
+### Authentication
+- `POST /auth/register` - Register new user
+- `POST /auth/login` - Login user
+- `GET /auth/profile` - Get user profile (protected)
+
+### Products
+- `GET /products` - Get all products
+- `GET /products/:id` - Get single product
+- `POST /products` - Create product (protected)
+- `PUT /products/:id` - Update product (protected)
+- `DELETE /products/:id` - Delete product (protected)
+
+### Health Check
+- `GET /health` - Server health status
+
+## 🧪 Testing
+
+### Test API with Postman
+Import `backend/postman_collection.json` into Postman for ready-to-use API tests.
+
+### Test Database Connection
+```bash
+cd backend
+node test-db.js
+```
+
+## 🔐 Authentication Flow
+
+1. **Register/Login** → User receives JWT token
+2. **Token Storage** → Frontend stores token in localStorage
+3. **API Requests** → Token sent in Authorization header
+4. **Protected Routes** → Backend validates token for restricted endpoints
+
+## 🎨 Frontend Features
+
+- **Modern UI** - Built with Tailwind CSS and shadcn/ui
+- **Responsive Design** - Mobile-first approach
+- **Dark/Light Mode** - Theme switching support
+- **Form Validation** - Real-time validation with error handling
+- **Loading States** - Smooth user experience with loading indicators
+- **Toast Notifications** - User feedback for all actions
+
+## 🛡 Security Features
+
+- **JWT Authentication** - Secure token-based auth
+- **Password Hashing** - bcrypt with salt rounds
+- **Input Validation** - Server-side validation with Joi
+- **CORS Protection** - Configured for frontend domain
+- **Rate Limiting** - API request throttling
+- **Helmet.js** - Security headers
+
+## 🔄 Development Scripts
+
+### Backend
+```bash
+npm run dev          # Start with nodemon (auto-reload)
+npm start            # Start production server
+npm run migrate      # Run database migrations
+npm run seed         # Run database seeds
+npm run migrate:rollback  # Rollback last migration
+```
+
+### Frontend
+```bash
 npm run dev          # Start development server
 npm run build        # Build for production
 npm run preview      # Preview production build
-
-# Database  
-npm run migrate      # Run database migrations
-npm run seed         # Seed database with sample data
-
-# Code Quality
 npm run lint         # Run ESLint
-npm run type-check   # TypeScript type checking
 ```
 
----
+## 📦 Deployment
 
-## 🔧 Troubleshooting
+### Backend Deployment
+1. Set environment variables for production
+2. Set `NODE_ENV=production`
+3. Configure production database
+4. Run migrations: `npm run migrate`
+5. Start server: `npm start`
 
-### Common Issues
-
-#### Backend Connection Issues
-```bash
-# Check if PostgreSQL is running
-sudo systemctl status postgresql
-
-# Test database connection
-node backend/test-db.js
-
-# Check environment variables
-echo $DB_NAME
-```
-
-#### Frontend Build Issues  
-```bash
-# Clear node_modules and reinstall
-rm -rf node_modules package-lock.json
-npm install
-
-# Check TypeScript errors
-npm run type-check
-```
-
-#### Image Upload Issues
-- Verify Cloudinary credentials
-- Check network connectivity
-- Ensure proper CORS settings
-
----
+### Frontend Deployment
+1. Build project: `npm run build`
+2. Deploy `dist/` folder to static hosting (Vercel, Netlify, etc.)
+3. Update API base URL for production
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to get started:
-
-### Development Workflow
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Make your changes**
-4. **Run tests and linting**
-   ```bash
-   npm run lint
-   npm run type-check
-   ```
-5. **Commit your changes**
-   ```bash
-   git commit -m "Add amazing feature"
-   ```
-6. **Push to your fork**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-7. **Open a Pull Request**
-
-### Areas for Contribution
-
-- 🔍 Search and filtering functionality
-- � Payment gateway integration  
-- 📊 Analytics dashboard
-- 🌍 Internationalization
-- 📱 Mobile app development
-- 🧪 Test coverage improvement
-
----
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
-### What this means:
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed  
-- ✅ Private use allowed
-- ❌ No warranty provided
-- ❌ No liability accepted
+## 🆘 Troubleshooting
 
----
+### Common Issues:
 
-## 🙏 Acknowledgments
+**Backend won't start:**
+- Check PostgreSQL is running
+- Verify database credentials in `.env`
+- Ensure database exists
 
-- **React Team** - For the amazing React framework
-- **Vercel** - For seamless deployment platform
-- **shadcn/ui** - For beautiful UI components
-- **Tailwind CSS** - For utility-first CSS framework
-- **PostgreSQL** - For robust database management
-- **Cloudinary** - For image management services
+**Frontend can't connect to backend:**
+- Check backend server is running on port 5000
+- Verify CORS settings
+- Check API base URL in frontend
 
----
+**Database connection fails:**
+- Run `node test-db.js` in backend directory
+- Check PostgreSQL service status
+- Verify database name and credentials
 
-## 📞 Support
+### Getting Help:
 
-Need help? Here are your options:
-
-- 📧 **Email Support:** [support@ecommercehub.dev](mailto:support@ecommercehub.dev)
-- 🐛 **Bug Reports:** [GitHub Issues](../../issues)
-- 💬 **Discussions:** [GitHub Discussions](../../discussions)
-- 📖 **Documentation:** [Full Documentation](./docs/README.md)
+1. Check the `backend/DATABASE_SETUP.md` for database issues
+2. Review server logs in terminal
+3. Check browser network tab for API errors
+4. Verify all environment variables are set correctly
 
 ---
 
-<div align="center">
+## 🎯 Demo Credentials
 
-**⭐ If you found this project helpful, please consider giving it a star! ⭐**
+The following demo accounts are available in the seeded database:
 
-Made with ❤️ by [Your Name](https://github.com/yourusername)
+**Admin User:**
+- Email: `admin@example.com`
+- Username: `admin` 
+- Password: `password123`
 
-</div>
+**Test User:**
+- Email: `test@example.com` 
+- Username: `testuser`
+- Password: `password123`
+
+> **Note:** These are demo credentials for development/testing purposes only. The seed file has been updated to preserve existing users and passwords, so these accounts will continue to work with their original passwords.
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
+
+**Edit a file directly in GitHub**
+
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
+
+**Use GitHub Codespaces**
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## What technologies are used for this project?
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/b455d147-b38e-49d4-8d4a-12fe49ed88c2) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)

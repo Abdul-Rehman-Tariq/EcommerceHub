@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Plus, Package, Edit, Search, DollarSign } from 'lucide-react';
+import { Plus, Package, Edit, Search, DollarSign, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Products: React.FC = () => {
@@ -46,6 +46,31 @@ const Products: React.FC = () => {
       style: 'currency',
       currency: 'USD',
     }).format(Number(price));
+  };
+
+  const handleDeleteProduct = async (productId: number, productName: string) => {
+    if (!confirm(`Are you sure you want to delete "${productName}"? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      await apiClient.delete(`/products/${productId}`);
+      
+      // Remove the product from the local state
+      setProducts(products.filter(product => product.id !== productId));
+      
+      toast({
+        title: "Success",
+        description: `Product "${productName}" has been deleted successfully.`,
+      });
+    } catch (error: any) {
+      console.error('Error deleting product:', error);
+      toast({
+        title: "Error", 
+        description: error.response?.data?.message || "Failed to delete product",
+        variant: "destructive",
+      });
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -140,15 +165,25 @@ const Products: React.FC = () => {
                       </div>
                     </div>
                     {user && (
-                      <Link to={`/products/${product.id}/edit`}>
+                      <div className="flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Link to={`/products/${product.id}/edit`}>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                        </Link>
                         <Button 
                           variant="ghost" 
                           size="sm"
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="h-8 w-8 p-0 text-red-600 hover:text-red-700 hover:bg-red-50"
+                          onClick={() => handleDeleteProduct(product.id, product.name)}
                         >
-                          <Edit className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4" />
                         </Button>
-                      </Link>
+                      </div>
                     )}
                   </div>
                 </CardHeader>

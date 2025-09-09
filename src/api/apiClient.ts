@@ -1,17 +1,6 @@
 import axios from 'axios';
 
-// Use environment variable for API URL, fallback to localhost for development
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
-  (import.meta.env.MODE === 'production' 
-    ? '/api'  // Use relative path in production (Vercel will handle routing)
-    : 'http://localhost:5000'  // Use localhost in development
-  );
-
-console.log('API Configuration:', {
-  MODE: import.meta.env.MODE,
-  VITE_API_URL: import.meta.env.VITE_API_URL,
-  API_BASE_URL: API_BASE_URL
-});
+const API_BASE_URL = 'http://localhost:5000';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
