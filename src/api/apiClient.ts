@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.MODE === 'production' 
+    ? 'https://auth-cart-backend.onrender.com' 
+    : 'http://localhost:5000');
 
 // Debug: Log the API URL being used
 console.log('🔍 API_BASE_URL:', API_BASE_URL);
@@ -38,10 +41,9 @@ apiClient.interceptors.response.use(
   (error) => {
     console.error('❌ API error:', error.message);
     console.error('❌ Error details:', error.response?.data || error);
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
-    }
+    
+    // Just return the error without any automatic redirects
+    // Let individual components handle authentication errors as needed
     return Promise.reject(error);
   }
 );

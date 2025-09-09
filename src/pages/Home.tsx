@@ -36,50 +36,50 @@ const Home: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative container mx-auto px-4 py-20 text-center">
+      <section className="relative container mx-auto px-4 py-12 sm:py-20 text-center">
         <div className="max-w-6xl mx-auto">
-          <Badge variant="secondary" className="mb-8 px-6 py-2 text-sm font-medium glass-card">
+          <Badge variant="secondary" className="mb-6 sm:mb-8 px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium glass-card">
             ✨ Welcome to the Future of E-commerce
           </Badge>
           
-          <h1 className="text-6xl md:text-8xl font-black mb-8 gradient-text leading-tight">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black mb-6 sm:mb-8 gradient-text leading-tight">
             EcommerceHub
           </h1>
           
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-6 max-w-4xl mx-auto leading-relaxed font-light">
+          <p className="text-lg sm:text-2xl md:text-3xl text-muted-foreground mb-4 sm:mb-6 max-w-4xl mx-auto leading-relaxed font-light">
             Your <span className="gradient-text font-semibold">complete e-commerce solution</span>
           </p>
           
-          <p className="text-lg text-muted-foreground/80 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-lg text-muted-foreground/80 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
             Shop amazing products or manage your online store with our powerful admin tools. 
             Built for modern businesses with cutting-edge technology.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex flex-col gap-4 sm:flex-row sm:gap-6 justify-center items-center">
             {user ? <>
-                <Link to="/dashboard">
-                  <Button size="lg" className="btn-gradient px-8 py-6 text-lg h-auto rounded-2xl">
+                <Link to="/dashboard" className="w-full sm:w-auto">
+                  <Button size="lg" className="btn-gradient w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg h-auto rounded-2xl">
                     Go to Dashboard
-                    <ArrowRight className="ml-3 h-6 w-6" />
+                    <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                   </Button>
                 </Link>
-                <Link to="/shop">
-                  <Button variant="outline" size="lg" className="glass-card px-8 py-6 text-lg h-auto rounded-2xl hover:bg-white/10">
+                <Link to="/shop" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="glass-card w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg h-auto rounded-2xl hover:bg-white/10">
                     Browse Products
-                    <Package className="ml-3 h-6 w-6" />
+                    <Package className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                   </Button>
                 </Link>
               </> : <>
-                <Link to="/shop">
-                  <Button size="lg" className="btn-gradient px-8 py-6 text-lg h-auto rounded-2xl">
+                <Link to="/shop" className="w-full sm:w-auto">
+                  <Button size="lg" className="btn-gradient w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg h-auto rounded-2xl">
                     Start Shopping
-                    <ArrowRight className="ml-3 h-6 w-6" />
+                    <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                   </Button>
                 </Link>
-                <Link to="/register">
-                  <Button variant="outline" size="lg" className="glass-card px-8 py-6 text-lg h-auto rounded-2xl hover:bg-white/10">
+                <Link to="/register" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="glass-card w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg h-auto rounded-2xl hover:bg-white/10">
                     Create Account
-                    <Users className="ml-3 h-6 w-6" />
+                    <Users className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                   </Button>
                 </Link>
               </>}
@@ -88,18 +88,18 @@ const Home: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section className="relative container mx-auto px-4 py-20">
+      <section className="relative container mx-auto px-4 py-12 sm:py-20">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
               Why Choose <span className="gradient-text">EcommerceHub</span>?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
               Powerful features designed to grow your business and delight your customers
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
             {features.map((feature, index) => (
               <Card key={index} className="product-card p-6 text-center group">
                 <CardHeader className="pb-4">
@@ -118,12 +118,12 @@ const Home: React.FC = () => {
           </div>
 
           {/* Benefits Section */}
-          <div className="glass-card p-12 rounded-3xl text-center">
-            <h3 className="text-3xl font-bold mb-8 gradient-text">Everything You Need to Succeed</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="glass-card p-6 sm:p-12 rounded-3xl text-center">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 gradient-text">Everything You Need to Succeed</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
               {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center space-x-3 group">
-                  <CheckCircle className="h-6 w-6 text-primary group-hover:text-accent transition-colors duration-300 flex-shrink-0" />
+                <div key={index} className="flex items-center space-x-3 group text-sm sm:text-base">
+                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-accent transition-colors duration-300 flex-shrink-0" />
                   <span className="text-left">{benefit}</span>
                 </div>
               ))}
@@ -134,16 +134,16 @@ const Home: React.FC = () => {
 
       {/* Footer */}
       <footer className="relative border-t border-border/20 navbar-glass">
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-8 sm:py-12">
           <div className="text-center">
-            <h3 className="text-2xl font-bold gradient-text mb-4">EcommerceHub</h3>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+            <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-3 sm:mb-4">EcommerceHub</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 max-w-md mx-auto px-2">
               Building the future of e-commerce, one store at a time.
             </p>
-            <div className="flex justify-center space-x-6">
-              <Badge variant="outline" className="glass-card">Built with Express</Badge>
-              <Badge variant="outline" className="glass-card">React + TypeScript</Badge>
-              <Badge variant="outline" className="glass-card">Modern Design</Badge>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+              <Badge variant="outline" className="glass-card text-xs sm:text-sm">Built with Express</Badge>
+              <Badge variant="outline" className="glass-card text-xs sm:text-sm">React + TypeScript</Badge>
+              <Badge variant="outline" className="glass-card text-xs sm:text-sm">Modern Design</Badge>
             </div>
           </div>
         </div>

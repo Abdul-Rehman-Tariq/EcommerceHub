@@ -177,4 +177,20 @@ All colors MUST be HSL.
     @apply glass-card card-hover rounded-xl overflow-hidden;
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   }
+
+  /* Mobile Optimizations */
+  @media (max-width: 640px) {
+    .container {
+      @apply px-4;
+    }
+    
+    .glass-card {
+      @apply p-4;
+    }
+    
+    .hero-gradient {
+      background: radial-gradient(ellipse at center, hsl(263 70% 60% / 0.1) 0%, transparent 40%),
+                  var(--gradient-secondary);
+    }
+  }
 }

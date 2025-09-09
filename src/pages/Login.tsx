@@ -32,9 +32,12 @@ const Login: React.FC = () => {
 
     try {
       await login(formData);
+      // Only navigate if login is successful
       navigate(from, { replace: true });
     } catch (error) {
-      // Error handled by auth context
+      // Error already handled by auth context with toast - just stay on login page
+      console.error('Login failed:', error);
+      // No navigation, just let the user try again
     } finally {
       setLoading(false);
     }
